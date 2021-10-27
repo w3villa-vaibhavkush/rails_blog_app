@@ -1,0 +1,41 @@
+<%= form_with(model: blog) do |form| %>
+  <% if blog.errors.any? %>
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+      <h2><%= pluralize(blog.errors.count, "error") %> prohibited this blog from being saved:</h2>
+
+      <ul>
+        <% blog.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  <% end %>
+
+  <div class="field form-group">
+    <% form.label :title %>
+    <%= form.text_field :title, class: "form-control", placeholder: "Title" %>
+  </div>
+  <br>
+
+  <div class="field">
+    <% form.label :body %>
+    <%= form.text_field :body, class: "form-control", placeholder: "Content" %>
+  </div>
+  <br>
+
+  <div class="field">
+    <% form.label :writer %>
+    <%= form.text_field :writer, class: "form-control", placeholder: "Author" %>
+  </div>
+  <br>
+  
+  <div class="field">
+    <% form.label :user_id %>
+    <%= form.text_field :user_id, id: :blog_user_id, value: current_user.id, type: :hidden %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
