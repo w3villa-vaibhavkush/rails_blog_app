@@ -5,7 +5,17 @@ class BlogsController < ApplicationController
 
   # GET /blogs or /blogs.json
   def index
-    @blogs = Blog.all
+
+    #search code starts
+    if params[:q].blank?
+      @blogs = Blog.all
+    else
+      @term = params[:q]
+      @blogs = Blog.where('title LIKE ?', '%'+@term+'%')
+    end
+    #search code ends
+
+    #@blogs = Blog.all
   end
 
   # GET /blogs/1 or /blogs/1.json
